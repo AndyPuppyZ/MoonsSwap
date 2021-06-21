@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <style>
+    h2 {text-align: center;}
+    p {text-align: center;}
+    div {text-align: center;}
+    body {text-align: center;}
+    </style>
+<h2>MoonsSwap</h2>
+
+<p>Please Enter Your Reddit Address:</p>
+
+<input id="numb">
+
+<button type="button" onclick="myFunction()">Submit</button>
+
+<p id="demo"></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+
+
+
+<script>
+
+
+var url = "http://127.0.0.1:8000"
+
+
+
+
+function myFunction() {
+  var x, text;
+  text = "Please Wait";
+  document.getElementById("demo").innerHTML = text;
+  // Get the value of the input field with id="numb"
+  x = document.getElementById("numb").value;
+
+  // If x is Not a Number or less than one or greater than 10
+  if (x == "") {
+    text = "invalid Address";
+    document.getElementById("demo").innerHTML = text;
+  } else {
+    
+    $.ajax({
+        type: "POST",
+        url: url,
+        data: x,
+        success: function (data) {
+          console.log(data);
+          text = "Please Wait";
+          document.getElementById("demo").innerHTML = text;
+          var getInput = data;
+          localStorage.setItem("storageName",getInput);
+          window.location.href = "Payment.html";
+        },
+        error: function (err) {
+          console.log(err);
+          text = "Server Is Down, Try Again Later";
+          document.getElementById("demo").innerHTML = text;
+        }
+    });  
+  }
+ 
+}
+</script>
+
+</body>
+</html> 
